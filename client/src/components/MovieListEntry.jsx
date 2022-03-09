@@ -1,33 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class MovieListEntry extends React.Component {
-  constructor(props) {
-    super(props);
+const MovieListEntry = ({movie, watched, index, handleClick}) => (
+  <div className="movie-entry">
+    <div className="movie-title"> {movie.title} </div>
+    <button className="movie-watched-button"
+            onClick={() => handleClick(index)}>
+      {watched ? 'Watched' : 'Not Watched'}
+    </button>
+  </div>
+);
 
-    this.state = {
-      watched: false
-    };
-  }
-
-  handleClick(e) {
-    this.setState({
-      watched: !this.state.watched
-    });
-  };
-
-  render() {
-    const {movie} = this.props;
-
-    return (
-      <div className="movie-entry"
-           style={{fontWeight: this.state.watched ? 'bold': 'normal'}}
-           onClick={this.handleClick.bind(this)}>
-        {movie.title}
-      </div>
-    );
-  }
-}
 MovieListEntry.propTypes = {
   movie: PropTypes.object.isRequired
 }
